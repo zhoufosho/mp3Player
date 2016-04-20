@@ -119,3 +119,22 @@ bool Check4Keystroke(void)
   }
   return false;
 }
+
+
+/****************************************************************************
+ Function
+   Check4Volume
+****************************************************************************/
+
+bool Check4Volume(void)
+{
+  if ( IsNewKeyReady() ) // new key waiting?
+  {
+    ES_Event ThisEvent;
+    ThisEvent.EventType = ES_NEW_KEY;
+    ThisEvent.EventParam = GetNewKey();
+    PostTestHarnessService0( ThisEvent );
+    return true;
+  }
+  return false;
+}

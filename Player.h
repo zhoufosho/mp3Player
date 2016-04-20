@@ -5,17 +5,17 @@
 
  ****************************************************************************/
 
-#ifndef TestHarnessService0_H
-#define TestHarnessService0_H
+#ifndef Player_H
+#define Player_H
 
 #include "ES_Configure.h"
 #include "./Framework/ES_Types.h"
 
 // Public Function Prototypes
 
-bool InitTestHarnessService0 ( uint8_t Priority );
-bool PostTestHarnessService0( ES_Event ThisEvent );
-ES_Event RunTestHarnessService0( ES_Event ThisEvent );
+bool InitPlayer ( uint8_t Priority );
+bool PostPlayer( ES_Event ThisEvent );
+ES_Event RunPlayer( ES_Event ThisEvent );
 
 
 #endif /* ServTemplate_H */

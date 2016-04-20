@@ -39,11 +39,11 @@
 // priorities
 // the header file with the public function prototypes. 
 //prefix filename with ../ and surround with ""
-#define SERV_0_HEADER "../TestHarnessService0.h"
+#define SERV_0_HEADER "../Player.h"
 // the name of the Init function
-#define SERV_0_INIT InitTestHarnessService0
+#define SERV_0_INIT InitPlayer
 // the name of the run function
-#define SERV_0_RUN RunTestHarnessService0
+#define SERV_0_RUN RunPlayer
 // How big should this services Queue be?
 #define SERV_0_QUEUE_SIZE 5
 
@@ -56,11 +56,11 @@
 #if NUM_SERVICES > 1
 // the header file with the public function prototypes
 //prefix filename with ../ and surround with ""
-#define SERV_1_HEADER "../TestHarnessService1.h"
+#define SERV_1_HEADER "../TrackSM.h"
 // the name of the Init function
-#define SERV_1_INIT InitTestHarnessService1
+#define SERV_1_INIT InitTrackSM
 // the name of the run function
-#define SERV_1_RUN RunTestHarnessService1
+#define SERV_1_RUN RunTrackSM
 // How big should this services Queue be?
 #define SERV_1_QUEUE_SIZE 3
 #endif
@@ -70,11 +70,11 @@
 #if NUM_SERVICES > 2
 // the header file with the public function prototypes
 //prefix filename with ../ and surround with ""
-#define SERV_2_HEADER "../TestHarnessService2.h"
+#define SERV_2_HEADER "../PresetSM.h"
 // the name of the Init function
-#define SERV_2_INIT InitTestHarnessService2
+#define SERV_2_INIT InitPresetSM
 // the name of the run function
-#define SERV_2_RUN RunTestHarnessService2
+#define SERV_2_RUN RunPresetSM
 // How big should this services Queue be?
 #define SERV_2_QUEUE_SIZE 3
 #endif
@@ -270,7 +270,11 @@ typedef enum {  ES_NO_EVENT = 0,
                 ES_INIT,   /* used to transition from initial pseudo-state */
                 ES_TIMEOUT, /* signals that the timer has expired */
                 ES_SHORT_TIMEOUT, /* signals that a short timer has expired */
-                /* User-defined events start here */
+                /* User-defined events start here, TRACK MACHINE */
+                PLAY_BTN_DOWN,
+                NEXT_BTN_DOWN,
+                PREV_BTN_DOWN,
+                /* User-defined events END here */
                 ES_NEW_KEY, /* signals a new key received from terminal */
                 ES_LOCK,
                 ES_UNLOCK} ES_EventTyp_t ;
@@ -281,10 +285,10 @@ typedef enum {  ES_NO_EVENT = 0,
 // services are on that distribution list.
 #define NUM_DIST_LISTS 1
 #if NUM_DIST_LISTS > 0 
-#define DIST_LIST0 PostTestHarnessService0, PostTestHarnessService0
+#define DIST_LIST0 PostPlayer //IS THIS RIGHT??
 #endif
 #if NUM_DIST_LISTS > 1 
-#define DIST_LIST1 PostTestHarnessService1, PostTestHarnessService1
+#define DIST_LIST1 PostTrackSM //IS THIS RIGHT??
 #endif
 #if NUM_DIST_LISTS > 2 
 #define DIST_LIST2 PostTemplateFSM
@@ -331,7 +335,7 @@ typedef enum {  ES_NO_EVENT = 0,
 #define TIMER12_RESP_FUNC TIMER_UNUSED
 #define TIMER13_RESP_FUNC TIMER_UNUSED
 #define TIMER14_RESP_FUNC TIMER_UNUSED
-#define TIMER15_RESP_FUNC PostTestHarnessService0
+#define TIMER15_RESP_FUNC TIMER_UNUSED
 
 /****************************************************************************/
 // Give the timer numbers symbolc names to make it easier to move them
