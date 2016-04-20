@@ -17,6 +17,5 @@ bool InitPlayer ( uint8_t Priority );
 bool PostPlayer( ES_Event ThisEvent );
 ES_Event RunPlayer( ES_Event ThisEvent );
 
-
 #endif /* ServTemplate_H */
 

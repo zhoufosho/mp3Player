@@ -51,6 +51,9 @@ static uint8_t MyPriority;
 // add a deferral queue for up to 3 pending deferrals +1 to allow for overhead
 static ES_Event DeferralQueue[3+1];
 
+static Lab2 mp3(2, 3, mp3b);
+static uint16_t currentTrackNum = 4;
+
 /*------------------------------ Module Code ------------------------------*/
 /****************************************************************************
  Function
@@ -82,13 +85,6 @@ bool InitPlayer ( uint8_t Priority )
   ES_InitDeferralQueueWith( DeferralQueue, ARRAY_SIZE(DeferralQueue) );
 	// initialize LED drive for testing/debug output
 	InitLED();
-
-
-  Lab2 mp3(2, 3, mp3b);
-  mp3.initHardware();
-  mp3.setVolume(1);
-  mp3.play();
-  
   
   // post the initial transition event
   ThisEvent.EventType = ES_INIT;
@@ -146,13 +142,18 @@ ES_Event RunPlayer( ES_Event ThisEvent )
   ReturnEvent.EventType = ES_NO_EVENT; // assume no errors
 	static char DeferredChar = '1';
   
+  
   switch (ThisEvent.EventType){
     case ES_INIT :
       ES_Timer_InitTimer(SERVICE0_TIMER, HALF_SEC);
       Serial.print(F("Service 00: "));
       Serial.print(F("ES_INIT received in Service"));
       Serial.println(MyPriority);
-      InitPlayer(MyPriority);
+      
+      
+      mp3.setTrack(currentTrackNum);
+      mp3.setVolume(100);
+      mp3.play();
       break;
     case ES_TIMEOUT :  // re-start timer & announce
       ES_Timer_InitTimer(SERVICE0_TIMER, FIVE_SEC);
