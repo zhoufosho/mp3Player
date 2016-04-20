@@ -37,15 +37,15 @@
 // Every Events and Services application must have a Service 0. Further 
 // services are added in numeric sequence (1,2,3,...) with increasing 
 // priorities
-// the header file with the public function prototypes. 
+// the header file with the public function prototypes
 //prefix filename with ../ and surround with ""
-#define SERV_0_HEADER "../Player.h"
+#define SERV_0_HEADER "../TrackSM.h"
 // the name of the Init function
-#define SERV_0_INIT InitPlayer
+#define SERV_0_INIT InitTrackSM
 // the name of the run function
-#define SERV_0_RUN RunPlayer
+#define SERV_0_RUN RunTrackSM
 // How big should this services Queue be?
-#define SERV_0_QUEUE_SIZE 5
+#define SERV_0_QUEUE_SIZE 3
 
 /****************************************************************************/
 // The following sections are used to define the parameters for each of the
@@ -285,7 +285,7 @@ typedef enum {  ES_NO_EVENT = 0,
 // services are on that distribution list.
 #define NUM_DIST_LISTS 1
 #if NUM_DIST_LISTS > 0 
-#define DIST_LIST0 PostPlayer //IS THIS RIGHT??
+#define DIST_LIST0 PostTrackSM //IS THIS RIGHT??
 #endif
 #if NUM_DIST_LISTS > 1 
 #define DIST_LIST1 PostTrackSM //IS THIS RIGHT??

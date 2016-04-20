@@ -149,12 +149,11 @@ ES_Event RunPlayer( ES_Event ThisEvent )
       Serial.print(F("Service 00: "));
       Serial.print(F("ES_INIT received in Service"));
       Serial.println(MyPriority);
-      
-      
       mp3.setTrack(currentTrackNum);
       mp3.setVolume(100);
       mp3.play();
       break;
+    
     case ES_TIMEOUT :  // re-start timer & announce
       ES_Timer_InitTimer(SERVICE0_TIMER, FIVE_SEC);
       Serial.print(F("ES_TIMEOUT received from Timer "));

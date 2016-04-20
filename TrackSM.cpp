@@ -25,6 +25,7 @@
 #include "./Framework/ES_Framework.h"
 #include "./Framework/ES_DeferRecall.h"
 #include "TrackSM.h"
+#include "Lab2.h"
 
 
 /*----------------------------- Module Defines ----------------------------*/
@@ -49,6 +50,9 @@ static uint8_t MyPriority;
 static ES_Event DeferralQueue[3+1];
 
 static TrackState CurrentState;
+
+static Lab2 mp3(2, 3, mp3b);
+static uint16_t currentTrackNum = 4;
 
 /*------------------------------ Module Code ------------------------------*/
 /****************************************************************************
@@ -148,9 +152,9 @@ ES_Event RunTrackSM( ES_Event ThisEvent )
           {
               Serial.println(F("Track SM Initialized"));
               // now put the machine into the actual initial state
-//              mp3.setVolume(50);
-//              mp3.setTrack(1);
-//              mp3.play();
+              mp3.setVolume(100);
+              mp3.setTrack(currentTrackNum);
+              mp3.play();
               CurrentState = PlayingState;
            }
            break;
@@ -162,7 +166,7 @@ ES_Event RunTrackSM( ES_Event ThisEvent )
               case PLAY_BTN_DOWN : 
               {
                   Serial.println(F("Play button pressed"));
-                  //mp3.pause();
+                  mp3.pause();
                   CurrentState = PausingState;
                }
                break;
@@ -170,16 +174,19 @@ ES_Event RunTrackSM( ES_Event ThisEvent )
               case PREV_BTN_DOWN : 
               {
                   Serial.println(F("Prev button pressed"));
-                  //mp3.prev();
+                  currentTrackNum--;
+                  mp3.previous();
                }
                break;
 
                case NEXT_BTN_DOWN : 
               {
                   Serial.println(F("Next button pressed"));
-                  //mp3.next();
+                  currentTrackNum++;
+                  mp3.next();
                }  
                break;
+
 
           }// end switch on CurrentEvent
           break;
@@ -191,7 +198,7 @@ ES_Event RunTrackSM( ES_Event ThisEvent )
               case PLAY_BTN_DOWN : 
               {
                   Serial.println(F("Play button pressed"));
-                  //mp3.play();
+                  mp3.play();
                   CurrentState = PlayingState;
                }
                break;
@@ -199,14 +206,16 @@ ES_Event RunTrackSM( ES_Event ThisEvent )
                case PREV_BTN_DOWN : 
               {
                   Serial.println(F("Prev button pressed"));
-                  //mp3.prev();
+                  currentTrackNum--;
+                  mp3.previous();
                }
                break;
 
                case NEXT_BTN_DOWN : 
               {
                   Serial.println(F("Next button pressed"));
-                  //mp3.next();
+                  currentTrackNum++;
+                  mp3.next();
                }  
                break;
 
